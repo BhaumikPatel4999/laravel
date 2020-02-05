@@ -1,0 +1,104 @@
+/* cant refresh after freelancer profile setting fix */
+app.js(lines 152304-152306)
+
+setTimeout(function () {
+            window.location.replace(APP_URL + '/freelancer/dashboard');
+          }, 4000);
+
+
+/* header image fixed */
+C:\xampp\htdocs\worketic\resources\views\includes\header.blade.php
+line:138
+<img style="width: 40px; height: 40px;"
+
+
+/* sidebar profile and banner image issues fixed */
+
+EmployeeController >> 
+lines : 125-137
+
+public function uploadTempImage(Request $request)
+    {
+        $path = Helper::PublicPath() . '/uploads/users/temp/';
+        if (!empty($request['hidden_avater_image'])) {
+            $image_size = array(
+                'small' => array(
+                    'width' => 45,
+                    'height' => 45,
+                ),
+                'medium' => array(
+                    'width' => 95,
+                    'height' => 95,
+                ),
+            );
+            $profile_image = $request['hidden_avater_image'];
+            return Helper::uploadTempImageWithSize($path, $profile_image,'', $image_size);
+        } elseif (!empty($request['hidden_banner_image'])) {
+            $image_size = array(
+                'small' => array(
+                    'width' => 350,
+                    'height' => 172,
+                ),
+                'medium' => array(
+                    'width' => 1140,
+                    'height' => 400,
+                ),
+            );
+            $profile_image = $request['hidden_banner_image'];
+            return Helper::uploadTempImageWithSize($path, $profile_image, '', $image_size);
+        }
+    }
+
+FreelancerController >> 
+lines : 128-140
+public function uploadTempImage(Request $request)
+    {
+        $path = Helper::PublicPath() . '/uploads/users/temp/';
+        // if (!empty($request['hidden_avater_image'])) {
+        //     $profile_image = $request['hidden_avater_image'];
+        //     return Helper::uploadTempImage($path, $profile_image);
+        // } elseif (!empty($request['hidden_banner_image'])) {
+        //     $profile_image = $request['hidden_banner_image'];
+        //     return Helper::uploadTempImage($path, $profile_image);
+        // }
+        if (!empty($request['hidden_avater_image'])) {
+            $image_size = array(
+                'small' => array(
+                    'width' => 45,
+                    'height' => 45,
+                ),
+                'medium' => array(
+                    'width' => 95,
+                    'height' => 95,
+                ),
+            );
+            $profile_image = $request['hidden_avater_image'];
+            return Helper::uploadTempImageWithSize($path, $profile_image,'', $image_size);
+        } elseif (!empty($request['hidden_banner_image'])) {
+            $image_size = array(
+                'small' => array(
+                    'width' => 350,
+                    'height' => 172,
+                ),
+                'medium' => array(
+                    'width' => 1140,
+                    'height' => 400,
+                ),
+            );
+            $profile_image = $request['hidden_banner_image'];
+            return Helper::uploadTempImageWithSize($path, $profile_image, '', $image_size);
+        } elseif (!empty($request['project_img'])) {
+            $profile_image = $request['project_img'];
+            return Helper::uploadTempImage($path, $profile_image);
+        } elseif (!empty($request['award_img'])) {
+            $profile_image = $request['award_img'];
+            return Helper::uploadTempImage($path, $profile_image);
+        }
+    }
+
+
+
+
+ 
+
+
