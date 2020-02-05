@@ -97,6 +97,23 @@ public function uploadTempImage(Request $request)
     }
 
 
+/* Helper model */
+lines : 1035-1048
+public static function getProfileImage($user_id,$size='')
+    {
+        $profile_image = User::find($user_id)->profile->avater;
+        if (!empty($profile_image)) {
+            if (!empty($size)) {
+                return '/uploads/users/' . $user_id . '/' . $size . '-' . $profile_image;
+            } else {
+                return '/uploads/users/' . $user_id . '/' . $profile_image;
+            }
+        } else{
+            return '/images/user.jpg';
+        }
+        // return !empty($profile_image) ? '/uploads/users/' . $user_id . '/' . $profile_image : '/images/user.jpg';
+    }
+
 
 
  
